@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
+
+import React, { useState } from 'react';
+import { View} from 'react-native';
+import SplashScreen from './screens/splashScreen'; // Import SplashScreen component
+import MainScreen from './screens/mainScreen';
+
+const App: React.FC = () => {
+  const [showSplash, setShowSplash] = useState(true);
+
+  const dismissSplash = () => {
+    setShowSplash(false);
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={{ flex: 1 }}>
+      {showSplash ? (
+        <SplashScreen onDismiss={dismissSplash} />
+      ) : (
+        <MainScreen/>
+      )}
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
